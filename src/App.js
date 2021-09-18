@@ -1,13 +1,18 @@
+import no_img from './no_img.png';
 import './App.css';
 import axios from 'axios';
 import React, { Component } from 'react';
+import ScriptTag from 'react-script-tag';
+
+//import './js/style-transfer';
 
 class App extends Component {
-
   state = {
     // Initially, no file is selected
     song1: null,
-    song2: null
+    song2: null,
+    isPlaying: false,
+    updateTimer: null,
   };
 
   // On file select (from the pop up)
@@ -37,7 +42,9 @@ class App extends Component {
     formData.append(
       "myFile",
       this.state.song1,
-      this.state.song1.name
+      this.state.song1.name,
+      this.state.song2,
+      this.state.song2.name
     );
 
     // Details of the uploaded file
@@ -74,7 +81,7 @@ class App extends Component {
       return (
         <div>
           <br />
-          <h4>Choose before Pressing the Upload button</h4>
+          <h4>Please upload two songs and then </h4>
         </div>
       );
     }
@@ -85,10 +92,10 @@ class App extends Component {
     return (
       <div class="container">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col files">
             <input type="file" onChange={this.onSong1Change} />
           </div>
-          <div class="col-md-6">
+          <div class="col files">
             <input type="file" onChange={this.onSong2Change} />
           </div>
         </div>
@@ -97,49 +104,11 @@ class App extends Component {
         </button>
         {this.fileData()}
 
-        <div class="player">
-
-
-          <div class="details">
-            <div class="now-playing">PLAYING x OF y</div>
-            <div class="track-art"></div>
-            <div class="track-name">Track Name</div>
-            <div class="track-artist">Track Artist</div>
-          </div>
-
-
-          <div class="buttons">
-            <div class="prev-track" onclick="prevTrack()">
-              <i class="fa fa-step-backward fa-2x"></i>
-            </div>
-            <div class="playpause-track" onclick="playpauseTrack()">
-              <i class="fa fa-play-circle fa-5x"></i>
-            </div>
-            <div class="next-track" onclick="nextTrack()">
-              <i class="fa fa-step-forward fa-2x"></i>
-            </div>
-          </div>
-
-
-          <div class="slider_container">
-            <div class="current-time">00:00</div>
-            <input type="range" min="1" max="100"
-              value="0" class="seek_slider" onChange="seekTo()"/>
-            <div class ="total-duration">00: 00</div>
-          </div>
-
-
-          <div class="slider_container">
-            <i class="fa fa-volume-down"></i>
-            <input type="range" min="1" max="100"
-              value="99" class="volume_slider" onChange="setVolume()"/>
-            <i class ="fa fa-volume-up"></i>
-          </div>
+        <div>
+          <audio ref="audio_tag" src="./static/music/foo.mp3" controls autoPlay />
         </div>
-
-
-        <script src="main.js"></script>
       </div>
+
     );
   }
 }

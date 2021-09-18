@@ -1,13 +1,18 @@
+import no_img from './no_img.png';
 import './App.css';
 import axios from 'axios';
 import React, { Component } from 'react';
+import ScriptTag from 'react-script-tag';
+
+//import './js/style-transfer';
 
 class App extends Component {
-
   state = {
     // Initially, no file is selected
     song1: null,
-    song2: null
+    song2: null,
+    isPlaying: false,
+    updateTimer: null,
   };
 
   // On file select (from the pop up)
@@ -74,7 +79,7 @@ class App extends Component {
       return (
         <div>
           <br />
-          <h4>Choose before Pressing the Upload button</h4>
+          <h4>Please upload two songs and then </h4>
         </div>
       );
     }
@@ -85,10 +90,10 @@ class App extends Component {
     return (
       <div class="container">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col files">
             <input type="file" onChange={this.onSong1Change} />
           </div>
-          <div class="col-md-6">
+          <div class="col files">
             <input type="file" onChange={this.onSong2Change} />
           </div>
         </div>
@@ -97,49 +102,59 @@ class App extends Component {
         </button>
         {this.fileData()}
 
-        <div class="player">
-
-
-          <div class="details">
-            <div class="now-playing">PLAYING x OF y</div>
-            <div class="track-art"></div>
-            <div class="track-name">Track Name</div>
-            <div class="track-artist">Track Artist</div>
-          </div>
-
-
-          <div class="buttons">
-            <div class="prev-track" onclick="prevTrack()">
-              <i class="fa fa-step-backward fa-2x"></i>
+        <div>
+          <audio ref="audio_tag" src="./static/music/foo.mp3" controls autoPlay />
+        </div>
+        {/*
+        <div class="container mt-3">
+          <div class="row">
+            <div class="col-12 col-md-4 text-center">
+              <div class="box">
+                <input type="file" id="contentFile" target="content" class="inputfile inputfile-color" data-multiple-caption="{count} files selected" multiple />
+                <label for="contentFile">
+                  <span> Album Cover 1 </span>
+                </label>
+              </div>
+              <div class="imageContainer">
+                <div class="screen">
+                  <img class="col-12" id="contentImg" src={no_img} />
+                </div>
+              </div>
             </div>
-            <div class="playpause-track" onclick="playpauseTrack()">
-              <i class="fa fa-play-circle fa-5x"></i>
+            <div class="col-md-4 text-center">
+              <div class="col-12 text-center">
+                <button class="btn btn-transfer">
+                  <span> Submit </span>
+                </button>
+              </div>
             </div>
-            <div class="next-track" onclick="nextTrack()">
-              <i class="fa fa-step-forward fa-2x"></i>
+            <div class="col-12 col-md-4 text-center">
+              <div class="box">
+                <input type="file" id="styleFile" target="style" class="inputfile inputfile-color" data-multiple-caption="{count} files selected" multiple />
+                <label for="styleFile">
+                  <span> Album Cover 2 </span>
+                </label>
+              </div>
+              <div class="imageContainer">
+                <div class="screen">
+                  <img class="col-12" id="styleImg" src={no_img} />
+                </div>
+                <em></em>
+              </div>
             </div>
           </div>
-
-
-          <div class="slider_container">
-            <div class="current-time">00:00</div>
-            <input type="range" min="1" max="100"
-              value="0" class="seek_slider" onChange="seekTo()"/>
-            <div class ="total-duration">00: 00</div>
-          </div>
-
-
-          <div class="slider_container">
-            <i class="fa fa-volume-down"></i>
-            <input type="range" min="1" max="100"
-              value="99" class="volume_slider" onChange="setVolume()"/>
-            <i class ="fa fa-volume-up"></i>
+          <div class="row m-md-3">
+            <div class="col-12 col-md-4 offset-md-4 text-center">
+              <div class="canvasContainer col-12">
+                <canvas id="stylized" class="d-none"></canvas>
+              </div>
+            </div>
           </div>
         </div>
-
-
-        <script src="main.js"></script>
+        <ScriptTag type="text/javascript" src="./js/style-transfer.js"/>
+        */}
       </div>
+
     );
   }
 }

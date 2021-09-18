@@ -13,9 +13,12 @@ class App extends Component {
   // On file select (from the pop up)
   onSong1Change = event => {
     // Update the state
+    console.log(event.target.files[0]);
+
     this.setState({
       song1: event.target.files[0]
     });
+    console.log(this.state.song1);
   };
 
   // On file select (from the pop up)
@@ -81,13 +84,17 @@ class App extends Component {
 
     return (
       <div>
-        <div>
-          <input type="file" onChange={this.onSong1Change} />
-          <input type="file" onChange={this.onSong2Change} />
-          <button onClick={this.onFileUpload}>
-            Upload!
-          </button>
+        <div class="row">
+          <div class="col-md-6">
+            <input type="file" onChange={this.onSong1Change} />
+          </div>
+          <div class="col-md-6">
+            <input type="file" onChange={this.onSong2Change} />
+          </div>
         </div>
+        <button onClick={this.onFileUpload}>
+          Upload!
+        </button>
         {this.fileData()}
       </div>
     );

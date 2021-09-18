@@ -6,14 +6,23 @@ class App extends Component {
 
   state = {
     // Initially, no file is selected
-    selectedFile: null
+    song1: null,
+    song2: null
   };
 
   // On file select (from the pop up)
-  onFileChange = event => {
+  onSong1Change = event => {
     // Update the state
     this.setState({
-      selectedFile: event.target.files[0]
+      song1: event.target.files[0]
+    });
+  };
+
+  // On file select (from the pop up)
+  onSong2Change = event => {
+    // Update the state
+    this.setState({
+      song2: event.target.files[0]
     });
   };
 
@@ -24,12 +33,12 @@ class App extends Component {
     // Update the formData object
     formData.append(
       "myFile",
-      this.state.selectedFile,
-      this.state.selectedFile.name
+      this.state.song1,
+      this.state.song1.name
     );
 
     // Details of the uploaded file
-    console.log(this.state.selectedFile);
+    console.log(this.state.song1);
 
     // Request made to the backend api
     // Send formData object
@@ -40,22 +49,21 @@ class App extends Component {
   // file upload is complete
   fileData = () => {
 
-    if (this.state.selectedFile) {
+    if (this.state.song1 && this.state.song2) {
 
       return (
         <div>
-          <h2>File Details:</h2>
+          <h2>File 1 Details:</h2>
 
-          <p>File Name: {this.state.selectedFile.name}</p>
+          <p>File 1 Name: {this.state.song1.name}</p>
 
+          <p>File 1 Type: {this.state.song1.type}</p>
 
-          <p>File Type: {this.state.selectedFile.type}</p>
+          <h2>File 2 Details:</h2>
 
+          <p>File 2 Name: {this.state.song2.name}</p>
 
-          <p>
-            Last Modified:{" "}
-            {this.state.selectedFile.lastModifiedDate.toDateString()}
-          </p>
+          <p>File 2 Type: {this.state.song2.type}</p>
 
         </div>
       );
@@ -74,7 +82,8 @@ class App extends Component {
     return (
       <div>
         <div>
-          <input type="file" onChange={this.onFileChange} />
+          <input type="file" onChange={this.onSong1Change} />
+          <input type="file" onChange={this.onSong2Change} />
           <button onClick={this.onFileUpload}>
             Upload!
           </button>

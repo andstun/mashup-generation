@@ -1,5 +1,9 @@
-from google.cloud import storage
+try:
+  from google.cloud import storage
+except ImportError:
+  from google.datalab import storage
 import argparse
+import os
 
 def upload_blob(storage_client, bucket_name, source_file_name, destination_blob_name):
     """Uploads a file to the bucket."""
@@ -24,9 +28,12 @@ if __name__=="__main__":
     client = storage.Client()
     bucket = client.get_bucket('youtube-mashup-data')
 
-    data_dir = "" #Jerry: put the local file of wherever the data is coming from here
-    for filename in os.listdir("data"):
+    data_dir = "../Downloader Stuff/Downloads/" 
+    for filename in os.listdir(data_dir):
         source_file_name = filename
-
-        destination_blob_name =  #Jerry: destination_blob_name="mashups/<mashupid>$<song1_id>$<song2_id>" or destination_blob_name="originals/song_id" 
+        destination_blob_name = ""
+        if ('$' in source_file_name):
+            destination_blob_name = "mashups/" + source_file_name 
+        else:
+            destination_blob_name="originals/" + source_file_name 
         upload_blob(client, bucket, source_file_name, destination_blob_name)

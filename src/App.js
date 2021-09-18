@@ -42,7 +42,9 @@ class App extends Component {
     formData.append(
       "myFile",
       this.state.song1,
-      this.state.song1.name
+      this.state.song1.name,
+      this.state.song2,
+      this.state.song2.name
     );
 
     // Details of the uploaded file
@@ -105,54 +107,6 @@ class App extends Component {
         <div>
           <audio ref="audio_tag" src="./static/music/foo.mp3" controls autoPlay />
         </div>
-        {/*
-        <div class="container mt-3">
-          <div class="row">
-            <div class="col-12 col-md-4 text-center">
-              <div class="box">
-                <input type="file" id="contentFile" target="content" class="inputfile inputfile-color" data-multiple-caption="{count} files selected" multiple />
-                <label for="contentFile">
-                  <span> Album Cover 1 </span>
-                </label>
-              </div>
-              <div class="imageContainer">
-                <div class="screen">
-                  <img class="col-12" id="contentImg" src={no_img} />
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 text-center">
-              <div class="col-12 text-center">
-                <button class="btn btn-transfer">
-                  <span> Submit </span>
-                </button>
-              </div>
-            </div>
-            <div class="col-12 col-md-4 text-center">
-              <div class="box">
-                <input type="file" id="styleFile" target="style" class="inputfile inputfile-color" data-multiple-caption="{count} files selected" multiple />
-                <label for="styleFile">
-                  <span> Album Cover 2 </span>
-                </label>
-              </div>
-              <div class="imageContainer">
-                <div class="screen">
-                  <img class="col-12" id="styleImg" src={no_img} />
-                </div>
-                <em></em>
-              </div>
-            </div>
-          </div>
-          <div class="row m-md-3">
-            <div class="col-12 col-md-4 offset-md-4 text-center">
-              <div class="canvasContainer col-12">
-                <canvas id="stylized" class="d-none"></canvas>
-              </div>
-            </div>
-          </div>
-        </div>
-        <ScriptTag type="text/javascript" src="./js/style-transfer.js"/>
-        */}
       </div>
 
     );

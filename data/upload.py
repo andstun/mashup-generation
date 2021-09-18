@@ -29,5 +29,4 @@ if __name__=="__main__":
         source_file_name = filename
 
         destination_blob_name =  #Jerry: destination_blob_name="mashups/<mashupid>$<song1_id>$<song2_id>" or destination_blob_name="originals/song_id" 
-
         upload_blob(client, bucket, source_file_name, destination_blob_name)

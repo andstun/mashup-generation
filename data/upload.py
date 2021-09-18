@@ -16,7 +16,8 @@ def upload_blob(storage_client, bucket_name, source_file_name, destination_blob_
 
     blob = bucket.blob(destination_blob_name)
 
-    blob.upload_from_filename(source_file_name)
+    data_dir = "Downloader Stuff/Downloads1/" 
+    blob.upload_from_filename(data_dir + source_file_name)
 
     print(
         "File {} uploaded to {}.".format(
@@ -28,8 +29,9 @@ if __name__=="__main__":
     client = storage.Client()
     bucket = client.get_bucket('youtube-mashup-data')
 
-    data_dir = "../Downloader Stuff/Downloads/" 
-    for filename in os.listdir(data_dir):
+    data_dir = "Downloader Stuff/Downloads1/" 
+    for i, filename in enumerate( os.listdir(data_dir)):
+        print (str(i) + " of " + str(len(os.listdir(data_dir))))
         source_file_name = filename
         destination_blob_name = ""
         if ('$' in source_file_name):
